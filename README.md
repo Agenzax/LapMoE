@@ -259,43 +259,6 @@ Uninstall: stop the service (`systemctl --user disable --now lapmoe`), then `rm 
 * **Port in use** — `--port 8081`.
 * A model switch takes a few seconds to minutes: llama-swap keeps one model resident and loads others on request.
 
-## Meet the mascot
-
-<p align="center">
-  <img src="assets/mascot-panel.png" alt="The black cat mascot lying on a slim laptop: it does not flinch" width="190">
-</p>
-
-<details>
-<summary>Reaction sheet, three views and design details</summary>
-
-<table align="center">
-<tr>
-  <td align="center"><img src="assets/expr-happy.png" width="130"><br><sub>신난다! (yay)</sub></td>
-  <td align="center"><img src="assets/expr-tired.png" width="130"><br><sub>힘들어… (heavy)</sub></td>
-  <td align="center"><img src="assets/expr-surprised.png" width="130"><br><sub>어?! (huh?!)</sub></td>
-</tr>
-<tr>
-  <td align="center"><img src="assets/expr-angry.png" width="130"><br><sub>화난다! (grr)</sub></td>
-  <td align="center"><img src="assets/expr-sleepy.png" width="130"><br><sub>졸려… (sleepy)</sub></td>
-  <td align="center"><img src="assets/expr-can-do.png" width="130"><br><sub>할 수 있어! (I can do it)</sub></td>
-</tr>
-</table>
-
-<p align="center"><img src="assets/three-view.png" alt="front, side and back views" width="440"></p>
-<p align="center"><img src="assets/design-details.png" alt="design details: cat-ear hood, X hairpin, hoodie and backpack, the cat mascot" width="500"></p>
-
-</details>
-
-The installer greets you with the same cat and wears the same faces while it works. To preview all of it (banner, the six
-expressions, warning/error looks, the finish art) and to check that your terminal can show it, run:
-
-```bash
-./install.sh --demo      # installs nothing, changes nothing
-```
-
-It also reports whether your terminal is interactive, UTF-8 (Korean expression names; otherwise English ones are used) and
-colour-capable. The art switches off by itself in pipes and log files; force that with `--plain` or `NO_COLOR=1`.
-
 ## Credits and licenses
 
 **LapMoE is released under the [MIT License](LICENSE)** — © 2026 Kyudong Kim. That covers the installer, this README and
