@@ -1,0 +1,6 @@
+# excluded from version control (2026-10-13)
+docs/
+bench/
+ops/
+run-claude.sh
+llama-swap/
