@@ -130,8 +130,9 @@ build, CPU cap managed by the author's governor at roughly 48-58 %, so absolute 
 | Model load (weights already in the page cache) | 18 s | 23 s |
 
 Pick `mid-8gb-tuned` for agents and long documents (twice the context, faster prompt reading); ask for the model name `mid`
-instead of `default` for chat-style use where generation speed matters most. The first request after a model loads is
-slower (weights are still being paged in); the numbers above are from warmed-up runs (6-9 runs each).
+instead of `default` for chat-style use where generation speed matters most. Individual runs sometimes come in clearly
+slower (18-24 tok/s seen) right after the model loads or after a short pause; the cause was not pinned down (a 90 s idle
+did not reproduce it). The numbers above are from warmed-up runs (6-9 runs each).
 
 ### Quality of the quantization (vs the 22 GB `Q4_K_M` of the same model)
 
