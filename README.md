@@ -22,6 +22,37 @@ It installs and wires together three things:
 Why a 35B model fits: it is a Mixture-of-Experts model with only ~3B parameters active per token. The experts
 live in system RAM and the always-used parts live on the GPU, so you need RAM more than VRAM.
 
+## What the installer does
+
+Run `./install.sh` and it works through six steps. If it is interrupted, run it again: finished steps are skipped and
+the model download resumes.
+
+1. **Looks at your machine** — RAM, GPU and VRAM, and whether the CUDA toolkit (`nvcc`) is there.
+2. **Decides what fits** — picks the model quantization that fits your RAM (rule: model file + 3 GiB ≤ RAM). On an 8 GB-class
+   NVIDIA card it also adds the hand-tuned preset.
+3. **Builds llama.cpp** — fetches a pinned upstream commit and compiles it for your GPU (10-25 minutes; the web UI is
+   skipped, so no Node.js/npm is needed).
+4. **Installs llama-swap** — downloads release v250, verifies its SHA-256, unpacks it to `bin/`.
+5. **Downloads the model** — resumable, size and SHA-256 checked against Hugging Face (or reuses a GGUF you already have
+   with `--model-path`).
+6. **Writes the glue** — `config.yaml` (which model to start, with which flags), `start.sh`, `test.sh`, and optionally a
+   systemd user service.
+
+Step 6 is where most of the value is. Doing this by hand means knowing the llama.cpp build options, the llama-swap config
+syntax, which quantization fits your RAM and how to split the layers between GPU and CPU. The presets in `config.yaml`
+carry the values that took the trial and error (see the measurements below).
+
+## What it does not do
+
+* **Cooling and power management.** A long generation keeps the CPU busy and hot. The installer does not touch fans,
+  CPU frequency caps or power limits. Some numbers further down were measured with a laptop-specific governor script
+  that is *not* part of this repo.
+* **No chat UI or agent framework.** You get an OpenAI-compatible server on `127.0.0.1`; connect your own client to it.
+* **Only Linux with an NVIDIA GPU.** No CPU-only mode, and no macOS or Windows. AMD/Intel GPUs (`--backend vulkan`) are
+  experimental and untested.
+* **Nothing outside its folder.** Everything lives in `--prefix` (default `~/lapmoe`), plus the optional user service.
+  No `sudo` unless you pass `--install-deps`, and other llama.cpp or llama-swap installs on the machine are left alone.
+
 ## Quick start
 
 ```bash
