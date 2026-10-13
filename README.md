@@ -25,7 +25,7 @@ live in system RAM and the always-used parts live on the GPU, so you need RAM mo
 ## Quick start
 
 ```bash
-git clone https://github.com/<your-user>/LapMoE.git && cd LapMoE
+git clone https://github.com/kyudongkim/LapMoE.git && cd LapMoE
 ./install.sh --dry-run      # see what it detected and what it would do, change nothing
 ./install.sh                # do it (asks before the big download)
 ~/lapmoe/start.sh        # start the server on http://127.0.0.1:8080/v1
